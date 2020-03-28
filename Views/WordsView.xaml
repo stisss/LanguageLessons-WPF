@@ -1,0 +1,26 @@
+﻿<Page x:Class="zadanie0.Views.WordsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:zadanie0.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="WordsView">
+	<Grid Background="White">
+		<TextBlock HorizontalAlignment="Left" Margin="52,10,0,0" Text="Subject, lesson, date" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="391" FontSize="24"/>
+		<TextBox x:Name="meaningTb" HorizontalAlignment="Left" Margin="479,118,0,0" Text="Translation" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="25"/>
+		<TextBox x:Name="foreignWordTb" HorizontalAlignment="Left" Margin="479,71,0,0" Text="New word" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="25"/>
+		<ListView x:Name="wordsList" Margin="36,71,400,137" SelectionChanged="wordsList_SelectionChanged" Width="395" Height="322.04">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn/>
+				</GridView>
+			</ListView.View>
+		</ListView>
+		<Button x:Name="addBtn" Content="Add" HorizontalAlignment="Left" Margin="479,165,0,0" VerticalAlignment="Top" Height="31" Width="158" Click="addBtn_Click"/>
+		<Button x:Name="deleteBtn" Content="Delete" HorizontalAlignment="Left" Margin="256,416,0,0" VerticalAlignment="Top" Height="31" Width="160" IsEnabled="False" Click="deleteBtn_Click"/>
+		<Button x:Name="backBtn" HorizontalAlignment="Left" Margin="52,416,0,0" VerticalAlignment="Top" Height="31" Width="160" Content="Back" Click="backBtn_Click"/>
+
+	</Grid>
+</Page>
