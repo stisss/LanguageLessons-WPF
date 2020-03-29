@@ -20,6 +20,7 @@ namespace zadanie0.Views
         private void addBtn_Click(object sender, RoutedEventArgs e)
         {
             presenter.AddNewItem();
+            ResetTextFields();
         }
 
         private void deleteBtn_Click(object sender, RoutedEventArgs e)
@@ -29,7 +30,16 @@ namespace zadanie0.Views
 
         private void wordsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            deleteBtn.IsEnabled = true;
+            if(wordsList.SelectedIndex!= -1)
+            {
+                deleteBtn.IsEnabled = true;
+                editBtn.IsEnabled = true;
+            }
+            else
+            {
+                deleteBtn.IsEnabled = false;
+                editBtn.IsEnabled = false;
+            }
         }
 
         private void backBtn_Click(object sender, RoutedEventArgs e)
@@ -66,14 +76,44 @@ namespace zadanie0.Views
             }
         }
 
-        public void DeleteItem(int index)
+        public void DeleteItem()
         {
-            wordsList.Items.Remove(wordsList.Items.GetItemAt(index));
+            wordsList.Items.Remove(wordsList.SelectedItem);
         }
 
         public int GetSelectedItemIndex()
         {
-            return wordsList.SelectedIndex;
+            return ((Word)wordsList.SelectedItem).Index;
+        }
+
+        public void ResetTextFields()
+        {
+            foreignWordTb.Text = "New word";
+            meaningTb.Text = "New translation";
+        }
+
+        private void editBtn_Click(object sender, RoutedEventArgs e)
+        {
+            updateBtn.IsEnabled = true;
+            addBtn.IsEnabled = false;
+            deleteBtn.IsEnabled = false;
+            editBtn.IsEnabled = false;
+            wordsList.IsEnabled = false;
+            string foreign = ((Word)wordsList.SelectedItem).ForeignWord;
+            string meaning = ((Word)wordsList.SelectedItem).Meaning;
+
+            foreignWordTb.Text = foreign;
+            meaningTb.Text = meaning;
+        }
+
+        private void updateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            updateBtn.IsEnabled = false;
+            addBtn.IsEnabled = true;
+            deleteBtn.IsEnabled = true;
+            editBtn.IsEnabled = true;
+            wordsList.IsEnabled = true;
+            presenter.EditItem();
         }
     }
 }

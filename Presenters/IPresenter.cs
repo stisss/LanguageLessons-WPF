@@ -10,5 +10,7 @@
 
         void BrowseItem();
 
+        void EditItem();
+
     }
 }

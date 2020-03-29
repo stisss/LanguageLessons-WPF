@@ -9,10 +9,10 @@ namespace zadanie0.Presenters
         private Model model;
         private WordDAO wordDAO;
 
-        public WordPresenter(WordsView view, int index)
+        public WordPresenter(WordsView view, int parentIndex)
         {
             this.view = view;
-            this.wordDAO = new WordDAO(index);
+            this.wordDAO = new WordDAO(parentIndex);
             this.model = new Model();
             Update();
         }
@@ -46,11 +46,31 @@ namespace zadanie0.Presenters
                 int index = view.GetSelectedItemIndex();
 
                 wordDAO.DeleteItem(index);
-                view.DeleteItem(index);
+                view.DeleteItem();
             }
             catch
             {
                 view.DisplayErrorMessage("Couldn't delete this item");
+                Update();
+            }
+        }
+
+        public void EditItem()
+        {
+            try
+            {
+                int index = view.GetSelectedItemIndex();
+                string foreign = view.GetForeign();
+                string meaning = view.GetMeaning();
+
+                wordDAO.UpdateItem(index, new Word(foreign, meaning));
+
+                Update();
+                view.ResetTextFields();
+            }
+            catch
+            {
+                view.DisplayErrorMessage("Couldn't update this item");
                 Update();
             }
         }

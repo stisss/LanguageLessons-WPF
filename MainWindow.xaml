@@ -6,20 +6,24 @@
         xmlns:local="clr-namespace:zadanie0"
         mc:Ignorable="d"
         Title="MainWindow" Height="546" Width="831">
-	<Grid>
-		<TextBox x:Name="numberTb" HorizontalAlignment="Left" Margin="479,118,0,0" Text="Lesson's  number" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="25"/>
-		<TextBox x:Name="subjectTb" HorizontalAlignment="Left" Margin="479,71,0,0" Text="New Subject" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="25"/>
-		<ListView x:Name="lessonsList" Margin="36,71,400,137" SelectionChanged="lessonsList_SelectionChanged">
-			<ListView.View>
-				<GridView>
-					<GridViewColumn/>
-				</GridView>
-			</ListView.View>
-		</ListView>
-		<Button x:Name="addBtn" Content="Add" HorizontalAlignment="Left" Margin="479,168,0,0" VerticalAlignment="Top" Height="31" Width="159" Click="addBtn_Click"/>
-		<TextBlock x:Name="errorMsg" HorizontalAlignment="Left" Margin="498,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="46" Width="140"/>
-		<Button x:Name="deleteBtn" Content="Delete" HorizontalAlignment="Left" Margin="256,416,0,0" VerticalAlignment="Top" Height="31" Width="160" IsEnabled="False" Click="deleteBtn_Click"/>
-		<Button x:Name="browseBtn" HorizontalAlignment="Left" Margin="52,416,0,0" VerticalAlignment="Top" Height="31" Width="160" Click="browseBtn_Click" Content="Browse"/>
-		<Frame x:Name="contentFrame" Content="" NavigationUIVisibility="Hidden" Visibility="Hidden"/>
-	</Grid>
+    <Grid>
+        <TextBox x:Name="numberTb" HorizontalAlignment="Left" Margin="479,118,0,0" Text="Lesson's  number" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="25"/>
+        <TextBox x:Name="subjectTb" HorizontalAlignment="Left" Margin="479,71,0,0" Text="New Subject" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="25"/>
+        <ListView x:Name="lessonsList" Margin="36,71,400,137" SelectionChanged="lessonsList_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="addBtn" Content="Add" HorizontalAlignment="Left" Margin="479,163,0,0" VerticalAlignment="Top" Height="31" Width="100
+                " Click="addBtn_Click"/>
+        <TextBlock x:Name="errorMsg" HorizontalAlignment="Left" Margin="498,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="46" Width="140"/>
+        <Button x:Name="deleteBtn" Content="Delete" HorizontalAlignment="Left" Margin="36,432,0,0" VerticalAlignment="Top" Height="31" Width="100" IsEnabled="False" Click="deleteBtn_Click"/>
+        <Button x:Name="browseBtn" HorizontalAlignment="Left" Margin="331,432,0,0" VerticalAlignment="Top" Height="31" Width="100" Click="browseBtn_Click" Content="Browse" IsEnabled="False"/>
+        <Button x:Name="editBtn" Content="Edit" HorizontalAlignment="Left" Margin="184,432,0,0" VerticalAlignment="Top" Height="31" Width="100" IsEnabled="False" Click="editBtn_Click"/>
+        <Button x:Name="updateBtn" Content="Update" HorizontalAlignment="Left" Margin="597,163,0,0" VerticalAlignment="Top" Height="31" Width="100
+                " IsEnabled="False" Click="updateBtn_Click"/>
+        <Frame x:Name="contentFrame" Content="" NavigationUIVisibility="Hidden" Visibility="Hidden"/>
+    </Grid>
 </Window>

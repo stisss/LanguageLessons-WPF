@@ -40,9 +40,9 @@ namespace zadanie0.Presenters
             try
             {
                 int index = view.GetSelectedItemIndex();
-                
+
                 lessonDAO.DeleteItem(index);
-                view.DeleteItem(index);
+                view.DeleteItem();
             }
             catch
             {
@@ -66,6 +66,26 @@ namespace zadanie0.Presenters
             catch
             {
                 view.DisplayErrorMessage("Couldn't browse this item");
+                Update();
+            }
+        }
+
+        public void EditItem()
+        {
+            try
+            {
+                int index = view.GetSelectedItemIndex();
+                string number = view.GetNumber();
+                string subject = view.GetSubject();
+
+                lessonDAO.UpdateItem(index, new Lesson(subject, number));
+
+                Update();
+                view.ResetTextFields();
+            }
+            catch
+            {
+                view.DisplayErrorMessage("Couldn't update this item");
                 Update();
             }
         }

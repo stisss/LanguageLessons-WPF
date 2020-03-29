@@ -8,7 +8,7 @@ namespace zadanie0.Models
 
          T GetItem(int index);
 
-         void UpdateItem(int index);
+         void UpdateItem(int index, T item);
 
          void DeleteItem(int index);
 

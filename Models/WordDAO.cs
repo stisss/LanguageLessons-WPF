@@ -6,17 +6,16 @@ namespace zadanie0.Models
 {
     class WordDAO : IDAO<Word>
     {
-        private string path = @"../../../Saves/lesson";
-        private int index;
+        private string path = @"../../../Saves/words.txt";
+        private int parentIndex;
 
         public WordDAO(int index)
         {
-            this.index = index;
-            this.path += index + ".txt";
+            parentIndex = index;
         }
         public void AddItem(Word item)
         {
-            string save = item.ForeignWord + "," + item.Meaning;
+            string save = parentIndex + "," + GetNewIndex() + "," + item.ForeignWord + "," + item.Meaning;
 
             using (StreamWriter sw = File.AppendText(path))
             {
@@ -33,10 +32,12 @@ namespace zadanie0.Models
             {
                 string line;
                 int lineCounter = 0;
+                string[] temp;
 
                 while ((line = sr.ReadLine()) != null)
                 {
-                    if (lineCounter != index)
+                    temp = line.Split(",");
+                    if (Int32.Parse(temp[1]) != index)
                     {
                         sw.WriteLine(line);
                     }
@@ -52,7 +53,7 @@ namespace zadanie0.Models
         {
             ArrayList items = new ArrayList();
             string buffer = "";
-            string[] temp = new string[2];
+            string[] temp;
 
             if (File.Exists(path))
             {
@@ -61,9 +62,11 @@ namespace zadanie0.Models
                     while ((buffer = sr.ReadLine()) != null)
                     {
                         temp = buffer.Split(",");
-                        items.Add(new Word(temp[0], temp[1]));
+                        if (temp[0].Equals(parentIndex.ToString()))
+                        {
+                            items.Add(new Word(Int32.Parse(temp[0]), Int32.Parse(temp[1]), temp[2], temp[3]));
+                        }
                     }
-
                 }
             }
             return items;
@@ -74,24 +77,90 @@ namespace zadanie0.Models
             throw new NotImplementedException();
         }
 
-        public void UpdateItem(int index)
+        public void UpdateItem(int index, Word item)
         {
-            throw new NotImplementedException();
+            string foreign = item.ForeignWord;
+            string meaning = item.Meaning;
+
+            string tempFile = Path.GetTempFileName();
+
+            using (var sr = new StreamReader(path))
+            using (var sw = new StreamWriter(tempFile))
+            {
+                string line;
+                int lineCounter = 0;
+                string[] temp;
+
+                while ((line = sr.ReadLine()) != null)
+                {
+                    temp = line.Split(",");
+                    if (Int32.Parse(temp[1]) != index)
+                    {
+                        sw.WriteLine(line);
+                    }
+                    else
+                    {
+                        temp[2] = foreign;
+                        temp[3] = meaning;
+                        sw.WriteLine(String.Join(',', temp));
+                    }
+                    lineCounter++;
+                }
+            }
+
+            File.Delete(path);
+            File.Move(tempFile, path);
         }
 
         public void CascadeDelete()
         {
-            if (File.Exists(path))
+            string tempFile = Path.GetTempFileName();
+
+            using (var sr = new StreamReader(path))
+            using (var sw = new StreamWriter(tempFile))
             {
-                File.Delete(path);
-                string nextPath = @"../../../Saves/lesson";
-                int nextIndex = index + 1;
-                while (File.Exists(nextPath + nextIndex + ".txt"))
+                string line;
+                int lineCounter = 0;
+                string[] temp;
+
+                while ((line = sr.ReadLine()) != null)
                 {
-                    File.Move(nextPath + nextIndex + ".txt", nextPath + (nextIndex-1) + ".txt");
-                    nextIndex++;
+                    temp = line.Split(",");
+                    if (Int32.Parse(temp[0]) != parentIndex)
+                    {
+                        sw.WriteLine(line);
+                    }
+                    lineCounter++;
                 }
             }
+
+            File.Delete(path);
+            File.Move(tempFile, path);
+        }
+
+        public int GetNewIndex()
+        {
+            if (File.Exists(path))
+            {
+                string buffer = "";
+                int index = 0;
+                string[] temp = new string[4];
+
+
+                using (var sr = File.OpenText(path))
+                {
+                    while ((buffer = sr.ReadLine()) != null)
+                    {
+                        temp = buffer.Split(",");
+                    }
+                    index = Int32.Parse(temp[1]);
+                }
+                return index + 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
-}
 }

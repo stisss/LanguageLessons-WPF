@@ -41,6 +41,7 @@ namespace zadanie0
         public void AddItemToList(Lesson lesson)
         {
             lessonsList.Items.Add(lesson);
+            ResetTextFields();
         }
 
         public void UpdateItemList(ArrayList items)
@@ -52,20 +53,30 @@ namespace zadanie0
             }
         }
 
-        public void DeleteItem(int index)
+        public void DeleteItem()
         {
-            lessonsList.Items.Remove(lessonsList.Items.GetItemAt(index));
+            lessonsList.Items.Remove(lessonsList.SelectedItem);
         }
 
         private void lessonsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            deleteBtn.IsEnabled = true;
-            browseBtn.IsEnabled = true;
+            if (lessonsList.SelectedIndex != -1)
+            {
+                deleteBtn.IsEnabled = true;
+                editBtn.IsEnabled = true;
+                browseBtn.IsEnabled = true;
+            }
+            else
+            {
+                deleteBtn.IsEnabled = false;
+                editBtn.IsEnabled = false;
+                browseBtn.IsEnabled = false;
+            }
         }
 
         public int GetSelectedItemIndex()
         {
-            return lessonsList.SelectedIndex;
+            return ((Lesson)lessonsList.SelectedItem).Index;
         }
 
         private void deleteBtn_Click(object sender, RoutedEventArgs e)
@@ -78,6 +89,38 @@ namespace zadanie0
             int index = GetSelectedItemIndex();
             contentFrame.Visibility = Visibility.Visible;
             contentFrame.Content = new WordsView(index);
+        }
+
+        private void editBtn_Click(object sender, RoutedEventArgs e)
+        {
+            updateBtn.IsEnabled = true;
+            addBtn.IsEnabled = false;
+            deleteBtn.IsEnabled = false;
+            editBtn.IsEnabled = false;
+            browseBtn.IsEnabled = false;
+            lessonsList.IsEnabled = false;
+            string subject = ((Lesson)lessonsList.SelectedItem).Subject;
+            string number = ((Lesson)lessonsList.SelectedItem).Number;
+
+            subjectTb.Text = subject;
+            numberTb.Text = number;
+        }
+
+        private void updateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            updateBtn.IsEnabled = false;
+            addBtn.IsEnabled = true;
+            deleteBtn.IsEnabled = true;
+            editBtn.IsEnabled = true;
+            browseBtn.IsEnabled = true;
+            lessonsList.IsEnabled = true;
+            presenter.EditItem();
+        }
+
+        public void ResetTextFields()
+        {
+            subjectTb.Text = "New Subject";
+            numberTb.Text = "Lesson's number";
         }
     }
 }

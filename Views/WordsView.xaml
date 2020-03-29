@@ -7,20 +7,23 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="WordsView">
-	<Grid Background="White">
-		<TextBlock HorizontalAlignment="Left" Margin="52,10,0,0" Text="Subject, lesson, date" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="391" FontSize="24"/>
-		<TextBox x:Name="meaningTb" HorizontalAlignment="Left" Margin="479,118,0,0" Text="Translation" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="25"/>
-		<TextBox x:Name="foreignWordTb" HorizontalAlignment="Left" Margin="479,71,0,0" Text="New word" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="25"/>
-		<ListView x:Name="wordsList" Margin="36,71,400,137" SelectionChanged="wordsList_SelectionChanged" Width="395" Height="322.04">
-			<ListView.View>
-				<GridView>
-					<GridViewColumn/>
-				</GridView>
-			</ListView.View>
-		</ListView>
-		<Button x:Name="addBtn" Content="Add" HorizontalAlignment="Left" Margin="479,165,0,0" VerticalAlignment="Top" Height="31" Width="158" Click="addBtn_Click"/>
-		<Button x:Name="deleteBtn" Content="Delete" HorizontalAlignment="Left" Margin="256,416,0,0" VerticalAlignment="Top" Height="31" Width="160" IsEnabled="False" Click="deleteBtn_Click"/>
-		<Button x:Name="backBtn" HorizontalAlignment="Left" Margin="52,416,0,0" VerticalAlignment="Top" Height="31" Width="160" Content="Back" Click="backBtn_Click"/>
+    <Grid Background="White" Margin="0,0,0,-10">
+        <TextBlock HorizontalAlignment="Left" Margin="52,10,0,0" Text="Subject, lesson, date" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="391" FontSize="24"/>
+        <TextBox x:Name="meaningTb" HorizontalAlignment="Left" Margin="479,118,0,0" Text="Translation" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="25"/>
+        <TextBox x:Name="foreignWordTb" HorizontalAlignment="Left" Margin="479,71,0,0" Text="New word" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="25"/>
+        <ListView x:Name="wordsList" Margin="36,71,384,73" SelectionChanged="wordsList_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="addBtn" Content="Add" HorizontalAlignment="Left" Margin="479,165,0,0" VerticalAlignment="Top" Height="31" Width="100
+                " Click="addBtn_Click"/>
+        <Button x:Name="deleteBtn" Content="Delete" HorizontalAlignment="Left" Margin="316,416,0,0" VerticalAlignment="Top" Height="31" Width="100" IsEnabled="False" Click="deleteBtn_Click"/>
+        <Button x:Name="backBtn" HorizontalAlignment="Left" Margin="36,416,0,0" VerticalAlignment="Top" Height="31" Width="100" Content="Back" Click="backBtn_Click"/>
+        <Button x:Name="editBtn" Content="Edit" HorizontalAlignment="Left" Margin="180,416,0,0" VerticalAlignment="Top" Height="31" Width="92" IsEnabled="False" Click="editBtn_Click"/>
+        <Button x:Name="updateBtn" Content="Update" HorizontalAlignment="Left" Margin="597,165,0,0" VerticalAlignment="Top" Height="31" Width="100" IsEnabled="False" Click="updateBtn_Click"/>
 
-	</Grid>
+    </Grid>
 </Page>

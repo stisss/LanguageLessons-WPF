@@ -7,7 +7,7 @@ namespace zadanie0.Views
         void DisplayErrorMessage(string message);
         void AddItemToList(T item);
         void UpdateItemList(ArrayList items);
-        void DeleteItem(int index);
+        void DeleteItem();
         int GetSelectedItemIndex();
     }
 }

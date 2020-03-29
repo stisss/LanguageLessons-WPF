@@ -2,22 +2,35 @@
 {
     public class Word
     {
-        private string foreignWord;
-        private string meaning;
-       
-
-        public string ForeignWord { get => foreignWord; set => foreignWord = value; }
-        public string Meaning { get => meaning; set => meaning = value; }
+        public int Index { get; private set; }
+        public int ParentIndex { get; private set; }
+        public string ForeignWord { get; set; }
+        public string Meaning { get; set; }
 
         public Word(string foreignWord, string meaning)
         {
-            this.meaning = foreignWord;
-            this.foreignWord = meaning;
+            Meaning = meaning;
+            ForeignWord = foreignWord;
+        }
+
+        public Word(string foreignWord, string meaning, int parentIndex)
+        {
+            Meaning = foreignWord;
+            ForeignWord = meaning;
+            ParentIndex = parentIndex;
+        }
+
+        public Word(int parentIndex, int index, string foreignWord, string meaning)
+        {
+            ForeignWord = foreignWord;
+            Meaning = meaning;
+            ParentIndex = parentIndex;
+            Index = index;
         }
 
         public override string ToString()
         {
-            return $"{foreignWord} - {meaning}";
+            return $"{ForeignWord} - {Meaning}";
         }
     }
 }
